@@ -14,7 +14,14 @@ def delete(request,id):
     student.delete()
     return redirect("/")
 
+
+
+    
 def create(request):
+
+    if request.method =="GET":
+        return render(request,'create.html')
+    
     name = request.POST.get('name')
     roll = request.POST.get('roll')
     age = request.POST.get('age')
