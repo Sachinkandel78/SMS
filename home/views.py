@@ -11,7 +11,8 @@ def index(request):
 
 def delete(request,id):
     student = Student.objects.get(id=id)
-    student.delete()
+    if request.method == "POST":
+        student.delete()
     return redirect("/")
 
 
@@ -38,6 +39,14 @@ def create(request):
 
 
 def update(request,id):
+    
+    if request.method =="GET":
+        student = Student.objects.get(id=id)
+        context = {
+            'student':student
+        }
+        return render(request,'update.html',context)
+    
     student = Student.objects.get(id=id)
     student.name = request.POST.get('name')
     student.roll = request.POST.get('roll')
