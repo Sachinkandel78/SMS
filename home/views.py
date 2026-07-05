@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import Student
 # Create your views here.
@@ -7,7 +8,9 @@ def index(request):
         'students':students
     }
 
-    return render(request,'index.html',context)
+    response = render(request,'index.html',context)
+    response.set_cookie('visited','True')
+    return response
 
 def delete(request,id):
     student = Student.objects.get(id=id)
@@ -17,8 +20,10 @@ def delete(request,id):
 
 
 
-    
+from django.http import HttpResponse  
 def create(request):
+    if request.COOKIES.get('visited') == "True":
+        return HttpResponse("Please go through the home page first before creating a student.")
 
     if request.method =="GET":
         return render(request,'create.html')
