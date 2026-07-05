@@ -6,11 +6,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link " href="{% url 'home' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'create' %}">Create</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    
                     <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>                </ul>
             </div>
         </div>
     </nav>
+
+    <script>
+        navs = document.getElementsByClassName('nav-link');
+        for (var i = 0; i < navs.length; i++) {
+            if (navs[i].href === window.location.href) {
+                navs[i].classList.add("active");
+            }
+        }
+    </script>
